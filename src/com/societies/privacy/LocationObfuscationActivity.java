@@ -118,7 +118,7 @@ public class LocationObfuscationActivity extends Activity implements OnItemSelec
 		}
 	}
 
-	private class ObfuscationTask extends AsyncTask<Integer, Object, Boolean> implements IDataObfuscationManagerCallback<Object> {
+	private class ObfuscationTask extends AsyncTask<Integer, Object, Long> implements IDataObfuscationManagerCallback<Object> {
 		Exception exception;
 		
 		@Override
@@ -141,13 +141,13 @@ public class LocationObfuscationActivity extends Activity implements OnItemSelec
 		}
 		
 		@Override
-		protected Boolean doInBackground(Integer... params) {
+		protected Long doInBackground(Integer... params) {
 			int progress = 0;
 			
 			// Check availability of a geolocation
 			if (null == geolocation) {
 				exception = new Exception("No location to obfuscate.");
-				return false;
+				return (long) 0;
 			}
 			// Create copy of geolocation
 			obfuscatedGeolocation = new Geolocation(geolocation.getLatitude(), geolocation.getLongitude(), geolocation.getHorizontalAccuracy());
@@ -167,7 +167,7 @@ public class LocationObfuscationActivity extends Activity implements OnItemSelec
 			progress += 5;
 			publishProgress(progress);
 			if (isCancelled()) {
-				return false;
+				return (long) 0;
 			}
 	        
 			// Obfuscation
@@ -182,14 +182,14 @@ public class LocationObfuscationActivity extends Activity implements OnItemSelec
 		    	progress += 90;
 				publishProgress(progress);
 				if (isCancelled()) {
-					return false;
+					return (long) 0;
 				}
-				return true;
+				return duree;
 			} catch (Exception e) {
 				publishProgress(98);
 				exception = e;
 			}
-			return false;
+			return (long) 0;
 		}
 
 		@Override
@@ -204,7 +204,7 @@ public class LocationObfuscationActivity extends Activity implements OnItemSelec
 		}
 
 		@Override
-		protected void onPostExecute(Boolean response) {
+		protected void onPostExecute(Long response) {
 			// Erreur exception
 			if (null != exception) {
 				txtObfuscationResults.setText("Error: "+exception.getMessage());
@@ -213,8 +213,8 @@ public class LocationObfuscationActivity extends Activity implements OnItemSelec
 			// No exception
 			else {
 				// Succès
-				if (response) {
-					txtObfuscationResults.setText(geolocationToString(obfuscatedGeolocation));
+				if (0 != response) {
+					txtObfuscationResults.setText(geolocationToString(obfuscatedGeolocation, response));
 				}
 				// Echec
 				else {
@@ -371,6 +371,9 @@ public class LocationObfuscationActivity extends Activity implements OnItemSelec
 	}
 	
 	public String geolocationToString(Geolocation geolocation) {
+		return geolocationToString(geolocation, 0);
+	}
+	public String geolocationToString(Geolocation geolocation, long duree) {
 		String algorithm = "";
 		if (-1 != geolocation.getObfuscationAlgorithm()) {
 			switch(geolocation.getObfuscationAlgorithm()) {
@@ -398,7 +401,7 @@ public class LocationObfuscationActivity extends Activity implements OnItemSelec
 		if (0 != geolocation.getObfuscationLevel()) {
 			obfuscationLevel = "to "+(geolocation.getObfuscationLevel()*100)+"%";
 		}
-		return "Geolocation"+("" != algorithm && "" != obfuscationLevel ? " ("+algorithm+" "+obfuscationLevel+")" : "")+":\n"+
+		return "Geolocation"+("" != algorithm && "" != obfuscationLevel ? " ("+algorithm+" "+obfuscationLevel+(0 != duree ? " in "+duree+"ms" : "")+")" : "")+":\n"+
 				"<"+GeolocationUtils.floor(geolocation.getLatitude(), 6)+", "+GeolocationUtils.floor(geolocation.getLongitude(), 6)+">\n"+
 				"Accuracy: "+geolocation.getHorizontalAccuracy();
 	}
