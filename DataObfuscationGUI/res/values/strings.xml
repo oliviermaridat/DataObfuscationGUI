@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, LocationObfuscationActivity!</string>
+    <string name="app_name">LocationObfuscation</string>
+    <string name="txtLocate">Locate</string>
+    <string name="txtObfuscate">Obfuscate</string>
+    <string name="txtCancel">Cancel</string>
+    <string name="titleGeolocation">Your Geolocation</string>
+    <string name="titleObfuscationLevel">Obfuscation Level</string>
+    <string name="titleMode">Obfuscation Mode</string>
+    <string name="titleObfuscationResults">Obfuscation Results</string>
+    <string name="titleWaiting">Waiting...</string>
+    <string name="txtProgressBar">Waiting...</string>
+    <string name="txtNoData">No data.</string>
+    <string-array name="arrayMode">
+        <item>E operation</item>
+        <item>R operation</item>
+        <item>S operation</item>
+        <item>ES operation</item>
+        <item>SE operation</item>
+        <item>SR operation</item>
+        <item>Random operation</item>
+    </string-array>
+        <string name="Waiting">txtProgressBar</string>
+</resources>
