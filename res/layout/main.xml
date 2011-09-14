@@ -7,14 +7,14 @@
 		android:id="@+id/titleGeolocation" android:text="@string/titleGeolocation"></TextView>
 	<LinearLayout android:layout_height="wrap_content"
 		android:layout_width="match_parent" android:id="@+id/linearLayout2"
-		android:layout_gravity="center_vertical" android:baselineAligned="true">
-		<TextView android:layout_height="wrap_content" android:id="@+id/txtGeolocation"
-			android:layout_width="wrap_content" android:layout_gravity="fill_horizontal"
-			android:layout_weight="1" android:text="@string/txtNoData"></TextView>
-		<Button android:layout_height="wrap_content"
-			android:layout_gravity="center_vertical" android:layout_weight="1"
-			android:layout_width="wrap_content" android:id="@+id/btnLocate"
-			android:text="@string/txtLocate"></Button>
+		android:layout_gravity="center_vertical" android:baselineAligned="true"
+		android:weightSum="1.0">
+		<TextView android:layout_weight=".69" android:layout_width="0dip"
+			android:layout_height="wrap_content" android:id="@+id/txtGeolocation"
+			android:layout_gravity="fill_horizontal" android:text="@string/txtNoData"></TextView>
+		<Button android:layout_weight=".3" android:layout_width="0dip"
+			android:layout_height="wrap_content" android:layout_gravity="center_vertical"
+			android:id="@+id/btnLocate" android:text="@string/txtLocate"></Button>
 	</LinearLayout>
 	<TextView android:textAppearance="?android:attr/textAppearanceMedium"
 		android:layout_height="wrap_content" android:layout_width="wrap_content"
@@ -24,12 +24,12 @@
 		android:id="@+id/linearLayout1" android:layout_height="wrap_content"
 		android:orientation="horizontal" android:layout_gravity="center_horizontal"
 		android:weightSum="1.0">
-		<SeekBar android:layout_weight=".69" android:layout_width="0dip"
+		<SeekBar android:layout_weight=".90" android:layout_width="0dip"
 			android:layout_height="wrap_content" android:id="@+id/seekBarObfuscationLevel"
 			android:layout_gravity="center_vertical"></SeekBar>
-		<TextView android:layout_weight=".3" android:layout_width="0dip"
+		<TextView android:layout_weight=".10" android:layout_width="0dip"
 			android:layout_height="wrap_content" android:text="TextView"
-			android:id="@+id/txtObfuscationLevel" android:layout_gravity="center"></TextView>
+			android:id="@+id/txtObfuscationLevel" android:layout_gravity="center|center_vertical|center_horizontal"></TextView>
 	</LinearLayout>
 	<TextView android:textAppearance="?android:attr/textAppearanceMedium"
 		android:layout_height="wrap_content" android:layout_width="wrap_content"

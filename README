@@ -1,0 +1,7 @@
+
+Hi there! This project is just an Android GUI to test data obfuscation algorithms.
+
+INSTALLATION IN AN ANDROID EMULATOR
+There is no GPS device in the emulator, so please, if you want to use this Android app in an Android emulator, do the following actions:
+* comment line 276 to 278 of LocationObfuscationActivity.java
+* uncomment line 279 of LocationObfuscationActivity.java. This will generate a default GPS location.
